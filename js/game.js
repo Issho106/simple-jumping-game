@@ -1,4 +1,3 @@
-const deltaTime = 1/30;
 const character = {
     width: 25,
     height: 40,
@@ -8,11 +7,6 @@ const character = {
     gravity: 10,
     jumpStrength: -300,
     groundLevel: 0,
-
-    draw() {
-        context.fillStyle = '#1f1f1f';
-        context.fillRect = (this.position.x, this.position.y, this.width, this.height);
-    },
 
     updateCharacterPosition() {
         if(this.isJumping) {
