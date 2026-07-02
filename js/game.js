@@ -76,9 +76,4 @@ function gameOver() {
     }
 }
 
-createObstacle();
-setInterval(()=> {
-    updateObstacles(1/60);
-}, 1000/60);
-
 spawnObstacle();
