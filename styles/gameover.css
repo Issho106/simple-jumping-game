@@ -1,0 +1,59 @@
+:root {
+  --background-color: #1d1d1d;
+  --text-color: white;
+  --button-color: #4caf50;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--background-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  width: 100%;
+}
+
+#gameover-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+h1 {
+  color: white;
+  font-size: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.final-score-text {
+  color: white;
+  font-size: 2rem;
+}
+
+#restart-btn {
+  padding: 20px 60px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: #d32f2f;
+  color: white;
+  transition: 0.3s;
+}
+
+#restart-btn:hover {
+  transform: scale(1.05);
+}
