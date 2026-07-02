@@ -38,8 +38,8 @@ let finalScoreElement = document.getElementById('final-score');
 
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
-         screen.classList.remove('active');
-        });
+        screen.classList.remove('active');
+    });
     document.getElementById(screenId).classList.add('active');
 }
 
@@ -75,6 +75,7 @@ function gameLoopFrame(currentTime) {
     const deltaTime = (currentTime - lastTime) / 1000;
     lastTime = currentTime;
 
+    update(deltaTime);
     updateObstacles(deltaTime);
     requestAnimationFrame(gameLoopFrame);
 }

@@ -1,10 +1,10 @@
 let isJumping = false;
 let position = { x: 0, y: 0 };
 let velocity = 0;
-const gravity = 10;
+const gravity = 980;
 const jumpStrength = -300;
 const groundLevel = 0;
-
+const charElement = document.getElementById('character');
 function jump() {
     if (isJumping) return;
     isJumping = true;
@@ -29,8 +29,10 @@ function update(deltaTime) {
     applyGravity(deltaTime);
     updateCharacterPosition(deltaTime);
     if (position.y >= groundLevel) {
-        land(this);
+        land();
     }
+
+    charElement.style.bottom = `${20-position.y}px`;
 }
 
 function handleKeyboard(event) {
