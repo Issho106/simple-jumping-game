@@ -23,3 +23,10 @@ function updateObstacles(deltaTime) {
         obstacle.element.style.left = `${obstacle.x}px`;
     }
 }
+
+function spawnObstacle() {
+    createObstacle();
+
+    const randomDelay = Math.floor(Math.random() * 2000) + 1500;
+    setTimeout(spawnObstacle, randomDelay);
+}
