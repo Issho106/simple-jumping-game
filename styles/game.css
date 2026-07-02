@@ -2,7 +2,7 @@
   --game-width: 900px;
   --game-height: 500px;
   --ground-height: 20px;
-  --character-size: 50px;
+  --character-size: 100px;
 }
 
 * {
@@ -23,12 +23,22 @@ body {
   width: var(--game-width);
   height: var(--game-height);
   border: 3px solid white;
-  background: white;
+  position: relative;
+}
+
+.background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 #game-header {
   padding: 20px;
   font-family: Arial;
+  color: white;
+  background-color: #1d1d1dcc;
 }
 
 #game-area {
@@ -36,6 +46,9 @@ body {
   width: 100%;
   height: calc(100% - 70px);
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #character {
@@ -43,9 +56,15 @@ body {
   width: var(--character-size);
   height: var(--character-size);
   left: 50px;
-  bottom: 20px;
-  background-color: #4caf50;
-  border-radius: 8px;
+  bottom: 18px;
+  /* background-color: #4caf50;
+  border-radius: 8px; */
+}
+
+#character img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 #obstacle-container {
@@ -63,5 +82,5 @@ body {
   left: 0;
   width: 100%;
   height: var(--ground-height);
-  background-color: #444;
+  background-color: #000;
 }

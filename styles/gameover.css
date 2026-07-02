@@ -23,12 +23,12 @@ main {
   width: 100%;
 }
 
-#landing-container {
+#gameover-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
 }
 
 h1 {
@@ -38,17 +38,22 @@ h1 {
   letter-spacing: 4px;
 }
 
-#start-btn {
+.final-score-text {
+  color: white;
+  font-size: 2rem;
+}
+
+#restart-btn {
   padding: 20px 60px;
-  font-size: 1.3rem;
   border: none;
   border-radius: 8px;
+  font-size: 1.2rem;
   cursor: pointer;
-  background: #4caf50;
+  background: #d32f2f;
   color: white;
   transition: 0.3s;
 }
 
-#start-btn:hover {
+#restart-btn:hover {
   transform: scale(1.05);
 }
