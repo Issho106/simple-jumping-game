@@ -84,3 +84,11 @@ body {
   height: var(--ground-height);
   background-color: #000;
 }
+
+#obstacle{
+  position: absolute;
+  width: 20px;
+  height: 50px;
+  background-color: red;
+  bottom: 20px;
+}
