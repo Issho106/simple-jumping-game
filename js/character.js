@@ -1,10 +1,12 @@
 let isJumping = false;
-let position = { x: 0, y: 0 };
+let position = { x: 50, y: 0 };
 let velocity = 0;
-const gravity = 980;
+const gravity = 880;
 const jumpStrength = -300;
 const groundLevel = 0;
 const charElement = document.getElementById('character');
+const characterWidth = 100;
+const characterHeight = 100;
 function jump() {
     if (isJumping) return;
     isJumping = true;
@@ -33,6 +35,7 @@ function update(deltaTime) {
     }
 
     charElement.style.bottom = `${20-position.y}px`;
+    charElement.style.left = `${position.x}px`;
 }
 
 function handleKeyboard(event) {
@@ -50,6 +53,15 @@ function handleClick(event) {
     if (input === 'gameplay-screen') {
         jump();
     }
+}
+
+function getCharacterBounds() {
+    return {
+        x: position.x,
+        y: position.y,
+        width: characterWidth,
+        height: characterHeight
+    };
 }
 
 document.addEventListener('keydown', handleKeyboard);
