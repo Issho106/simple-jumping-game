@@ -1,6 +1,3 @@
-const canvas = document.getElementById('gameplay-screen');
-const context = canvas.getContext('2d');
-const deltaTime = 1/30;
 const character = {
     width: 25,
     height: 40,
@@ -10,11 +7,6 @@ const character = {
     gravity: 10,
     jumpStrength: -300,
     groundLevel: 0,
-
-    draw() {
-        context.fillStyle = '#1f1f1f';
-        context.fillRect = (this.position.x, this.position.y, this.width, this.height);
-    },
 
     updateCharacterPosition() {
         if(this.isJumping) {
@@ -41,15 +33,13 @@ const character = {
 let gameRunning = false;
 let score = 0;
 let frameCount = 0;
-let obstacles = [];
 let gameLoop = null;
-let gameUpdate = updateCharacterPosition(deltaTime);
 let finalScoreElement = document.getElementById('final-score');
 
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
-         screen.classList.remove('active');
-        });
+        screen.classList.remove('active');
+    });
     document.getElementById(screenId).classList.add('active');
 }
 
@@ -72,9 +62,29 @@ function startGame() {
 
 function gameOver() {
     gameRunning = false;
+    /*
     if(gameLoop) { cancelAnimationFrame(gameLoop); }
     if(score > 0) {
         showScreen('game-over-screen');
         finalScoreElement.textContent = `Final Score: ${score}`;
-    }
+    }*/
 }
+
+let lastTime = 0;
+
+function gameLoopFrame(currentTime) {
+
+    if(!gameRunning) { return; }
+
+    const deltaTime = (currentTime - lastTime) / 1000;
+    lastTime = currentTime;
+
+    update(deltaTime);
+    updateObstacles(deltaTime);
+    checkCollisions();
+    requestAnimationFrame(gameLoopFrame);
+}
+
+gameRunning = true;
+spawnObstacle();
+requestAnimationFrame(gameLoopFrame);
