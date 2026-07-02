@@ -21,6 +21,11 @@ function updateObstacles(deltaTime) {
     for(const obstacle of obstacles) {
         obstacle.x -= obstacle.speed * deltaTime;
         obstacle.element.style.left = `${obstacle.x}px`;
+
+        if(obstacle.x + obstacle.width < 0) {
+            obstacle.element.remove();
+            obstacles.splice(obstacles.indexOf(obstacle), 1);
+        }
     }
 }
 
