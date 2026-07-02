@@ -62,23 +62,29 @@ function startGame() {
 
 function gameOver() {
     gameRunning = false;
+    /*
     if(gameLoop) { cancelAnimationFrame(gameLoop); }
     if(score > 0) {
         showScreen('game-over-screen');
         finalScoreElement.textContent = `Final Score: ${score}`;
-    }
+    }*/
 }
 
 let lastTime = 0;
 
 function gameLoopFrame(currentTime) {
+
+    if(!gameRunning) { return; }
+
     const deltaTime = (currentTime - lastTime) / 1000;
     lastTime = currentTime;
 
     update(deltaTime);
     updateObstacles(deltaTime);
+    checkCollisions();
     requestAnimationFrame(gameLoopFrame);
 }
 
+gameRunning = true;
 spawnObstacle();
 requestAnimationFrame(gameLoopFrame);

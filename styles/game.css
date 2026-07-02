@@ -57,6 +57,7 @@ body {
   height: var(--character-size);
   left: 50px;
   bottom: 18px;
+  border: 2px solid white;
   /* background-color: #4caf50;
   border-radius: 8px; */
 }

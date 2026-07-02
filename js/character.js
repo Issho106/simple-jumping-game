@@ -2,7 +2,7 @@ let isJumping = false;
 let position = { x: 50, y: 0 };
 let velocity = 0;
 const gravity = 880;
-const jumpStrength = -300;
+const jumpStrength = -325;
 const groundLevel = 0;
 const charElement = document.getElementById('character');
 const characterWidth = 100;
@@ -59,8 +59,8 @@ function getCharacterBounds() {
     return {
         x: position.x,
         y: position.y,
-        width: characterWidth,
-        height: characterHeight
+        width: 15,
+        height: 53
     };
 }
 

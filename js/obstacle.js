@@ -32,6 +32,24 @@ function updateObstacles(deltaTime) {
     }
 }
 
+function checkCollisions() {
+    const player = getCharacterBounds();
+
+    for (const obstacle of obstacles) {
+
+        if (
+            player.x < obstacle.x + obstacle.width &&
+            player.x + player.width > obstacle.x &&
+            player.y < obstacle.y + obstacle.height &&
+            player.y + player.height > obstacle.y
+        ) {
+            console.log('Collision detected!');
+            gameOver();
+        }
+
+    }
+}
+
 function spawnObstacle() {
     createObstacle();
 
