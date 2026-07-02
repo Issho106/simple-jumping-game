@@ -3,17 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="./script.js" defer></script>
+    <title>Jumping Game</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script src="js/character.js" defer></script>
+    <script src="js/obstacle.js" defer></script>
+    <script src="js/game.js" defer></script>
   </head>
+
   <body>
-    <main>
-      <div id="landing-container">
+    <main id="game-container">
+      <img
+        class="background-image"
+        src="assets/images/medievalbackground.jpg"
+        alt="Medieval background"
+      />
+
+      <section id="landing-screen" class="screen">
         <h1>Jumping Game</h1>
 
         <button id="start-btn">Start</button>
-      </div>
+      </section>
+
+      <section id="game-screen" class="screen hidden">
+        <header id="game-header">
+          <h2>
+            Score:
+            <span id="score">0</span>
+          </h2>
+        </header>
+
+        <div id="game-area">
+          <div id="character">
+            <img src="assets/images/knight.png" alt="Knight" />
+          </div>
+
+          <div id="obstacle-container">
+            <!-- inserts elements with class="obstacle" here with js -->
+            <div class="obstacle">
+              <img src="assets/images/skeleton.png" alt="Skeleton" />
+            </div>
+          </div>
+
+          <div id="ground">
+            <img src="assets/images/brick-ground.jpg" alt="Ground" />
+          </div>
+        </div>
+      </section>
+
+      <section id="gameover-screen" class="screen hidden">
+        <h1>Game Over</h1>
+        <p>
+          Final Score:
+          <span id="final-score">0</span>
+        </p>
+        <button id="restart-btn">Play Again</button>
+      </section>
     </main>
   </body>
 </html>

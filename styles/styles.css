@@ -1,0 +1,180 @@
+:root {
+  --game-width: 900px;
+  --game-height: 500px;
+  --ground-height: 20px;
+  --character-size: 100px;
+  --obstacle-size: 78px;
+  --background-color: #1d1d1d;
+  --text-color: white;
+  --green-button: #4caf50;
+  --red-button: #d32f2f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--background-color);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#game-container {
+  position: relative;
+  width: var(--game-width);
+  height: var(--game-height);
+  overflow: hidden;
+  border: 3px solid white;
+}
+
+.background-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  z-index: -1;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+#landing-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+}
+
+#game-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+#game-header {
+  display: flex;
+  align-items: center;
+  padding: 18px 24px;
+  color: var(--text-color);
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 4;
+}
+
+#game-area {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+#character {
+  position: absolute;
+  left: 50px;
+  bottom: 18px;
+  width: var(--character-size);
+  height: var(--character-size);
+  z-index: 3;
+}
+
+#character img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+
+#obstacle-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Every obstacle created by JavaScript must use this class */
+.obstacle {
+  position: absolute;
+  right: 60px;
+  bottom: 20px;
+  width: var(--obstacle-size);
+  height: var(--obstacle-size);
+  z-index: 3;
+}
+
+.obstacle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+
+#ground {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--ground-height);
+  z-index: 2;
+}
+
+#ground img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#gameover-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+h1 {
+  color: var(--text-color);
+  font-size: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-align: center;
+}
+
+p {
+  color: var(--text-color);
+  font-size: 2rem;
+}
+
+button {
+  padding: 18px 60px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+#start-btn {
+  background: var(--green-button);
+}
+
+#restart-btn {
+  background: var(--red-button);
+}
