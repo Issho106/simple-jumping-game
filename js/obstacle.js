@@ -15,3 +15,11 @@ function createObstacle() {
   };
   obstacles.push(obstacle);
 }
+
+function updateObstacles(deltaTime) {
+
+    for(const obstacle of obstacles) {
+        obstacle.x -= obstacle.speed * deltaTime;
+        obstacle.element.style.left = `${obstacle.x}px`;
+    }
+}

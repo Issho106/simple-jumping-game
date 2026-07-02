@@ -1,5 +1,3 @@
-const canvas = document.getElementById('game-area');
-const context = canvas.getContext('2d');
 const deltaTime = 1/30;
 const character = {
     width: 25,
@@ -79,4 +77,6 @@ function gameOver() {
 }
 
 createObstacle();
-console.log(obstacles);
+setInterval(()=> {
+    updateObstacles(1/60);
+}, 1000/60);
