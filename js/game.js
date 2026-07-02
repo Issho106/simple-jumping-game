@@ -40,7 +40,6 @@ let gameRunning = false;
 let score = 0;
 let frameCount = 0;
 let gameLoop = null;
-let gameUpdate = updateCharacterPosition(deltaTime);
 let finalScoreElement = document.getElementById('final-score');
 
 function showScreen(screenId) {
@@ -76,4 +75,15 @@ function gameOver() {
     }
 }
 
+let lastTime = 0;
+
+function gameLoopFrame(currentTime) {
+    const deltaTime = (currentTime - lastTime) / 1000;
+    lastTime = currentTime;
+
+    updateObstacles(deltaTime);
+    requestAnimationFrame(gameLoopFrame);
+}
+
 spawnObstacle();
+requestAnimationFrame(gameLoopFrame);
