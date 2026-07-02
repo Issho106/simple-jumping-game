@@ -1,19 +1,22 @@
 const obstacles = [];
 
 function createObstacle() {
-  const obstacleElement = document.createElement('div');
-  obstacleElement.classList.add('obstacle');
-  document.getElementById('obstacle-container').appendChild(obstacleElement);
+    const obstacleElement = document.createElement('div');
+    obstacleElement.classList.add('obstacle');
 
-  const obstacle = {
-    x: 800,
+    const obstacle = {
+        x: 800,
         y: 20,
         width: 20,
         height: 40,
         speed: 200,
         element: obstacleElement
-  };
-  obstacles.push(obstacle);
+    };
+
+    obstacleElement.style.left = `${obstacle.x}px`;
+    document.getElementById('obstacle-container').appendChild(obstacleElement);
+
+    obstacles.push(obstacle);
 }
 
 function updateObstacles(deltaTime) {
