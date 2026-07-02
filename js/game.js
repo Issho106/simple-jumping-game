@@ -1,4 +1,4 @@
-const canvas = document.getElementById('gameplay-screen');
+const canvas = document.getElementById('game-area');
 const context = canvas.getContext('2d');
 const deltaTime = 1/30;
 const character = {
@@ -41,7 +41,6 @@ const character = {
 let gameRunning = false;
 let score = 0;
 let frameCount = 0;
-let obstacles = [];
 let gameLoop = null;
 let gameUpdate = updateCharacterPosition(deltaTime);
 let finalScoreElement = document.getElementById('final-score');
@@ -78,3 +77,6 @@ function gameOver() {
         finalScoreElement.textContent = `Final Score: ${score}`;
     }
 }
+
+createObstacle();
+console.log(obstacles);

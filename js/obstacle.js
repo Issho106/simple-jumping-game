@@ -1,11 +1,17 @@
 const obstacles = [];
 
 function createObstacle() {
-  return {
+  const obstacleElement = document.createElement('div');
+  obstacleElement.classList.add('obstacle');
+  document.getElementById('obstacle-container').appendChild(obstacleElement);
+
+  const obstacle = {
     x: 800,
-    y: 20,
-    width: 30,
-    height: 60,
-    speed: 200
+        y: 20,
+        width: 20,
+        height: 40,
+        speed: 200,
+        element: obstacleElement
   };
+  obstacles.push(obstacle);
 }
