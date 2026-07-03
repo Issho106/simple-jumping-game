@@ -1,5 +1,5 @@
 const character = {
-    width: 25,
+    width: 50,
     height: 40,
     position: { x: 0, y: 0 },
     velocity: 0,
@@ -49,11 +49,11 @@ function initializeGame() {
     character.position.y = character.groundLevel;
     character.velocity = 0;
     character.isJumping = false;
-    document.getElementById('score').textContent = 'Score: 0';
+    document.getElementById('score').textContent = `Score: 0`;
 }
 
 function startGame() {
-    showScreen('gameplay-screen');
+    showScreen('game-screen');
     initializeGame();
     gameRunning = true;
     if(gameLoop) { cancelAnimationFrame(gameLoop); }
@@ -62,29 +62,29 @@ function startGame() {
 
 function gameOver() {
     gameRunning = false;
-    /*
     if(gameLoop) { cancelAnimationFrame(gameLoop); }
     if(score > 0) {
-        showScreen('game-over-screen');
+        showScreen('gameover-screen');
         finalScoreElement.textContent = `Final Score: ${score}`;
-    }*/
+    }
 }
 
 let lastTime = 0;
 
-function gameLoopFrame(currentTime) {
+function gameUpdate(currentTime) {
 
     if(!gameRunning) { return; }
 
     const deltaTime = (currentTime - lastTime) / 1000;
     lastTime = currentTime;
-
+    
+    document.getElementById('score').textContent = `${score}`;
     update(deltaTime);
     updateObstacles(deltaTime);
     checkCollisions();
-    requestAnimationFrame(gameLoopFrame);
+    requestAnimationFrame(gameUpdate);
 }
 
 gameRunning = true;
 spawnObstacle();
-requestAnimationFrame(gameLoopFrame);
+requestAnimationFrame(gameUpdate);

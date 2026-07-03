@@ -1,12 +1,13 @@
 let isJumping = false;
 let position = { x: 50, y: 0 };
 let velocity = 0;
-const gravity = 880;
-const jumpStrength = -325;
+const gravity = 400;
+const jumpStrength = -300;
 const groundLevel = 0;
 const charElement = document.getElementById('character');
 const characterWidth = 100;
 const characterHeight = 100;
+
 function jump() {
     if (isJumping) return;
     isJumping = true;
@@ -50,7 +51,7 @@ function handleClick(event) {
     const button = event.target.closest('button');
     if (!button) { return; }
     const input = button.value;
-    if (input === 'gameplay-screen') {
+    if (input === 'game-screen') {
         jump();
     }
 }
