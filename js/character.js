@@ -6,8 +6,8 @@ class Character {
         this.gravity = -1150;
         this.jumpStrength = 510;
         this.groundLevel = 0;      
-        this.characterWidth = 100;
-        this.characterHeight = 100;  
+        this.characterWidth = 82;
+        this.characterHeight = 110;  
     }
 
     jump() {

@@ -107,7 +107,6 @@ body {
   pointer-events: none;
 }
 
-/* Every obstacle created by JavaScript must use this class */
 .obstacle {
   position: absolute;
   right: 60px;
