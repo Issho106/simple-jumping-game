@@ -1,40 +1,9 @@
-const character = {
-    width: 50,
-    height: 40,
-    position: { x: 0, y: 0 },
-    velocity: 0,
-    isJumping: false,
-    gravity: 10,
-    jumpStrength: -300,
-    groundLevel: 0,
-
-    updateCharacterPosition() {
-        if(this.isJumping) {
-            this.position.y += this.velocity;
-            this.velocity += this.gravity;
-
-            if(this.position.y >= 0) {
-                this.position.y = 0;
-                this.isJumping = false;
-                this.velocity = 0;
-            }
-        }
-
-    },
-
-    jump() {
-        if(!this.isJumping) {
-            this.velocity = this.jumpStrength;
-            this.isJumping = true;
-        }
-    }
-};
-
 let gameRunning = false;
 let score = 0;
-let frameCount = 0;
+let lastTime = 0;
 let gameLoop = null;
 let finalScoreElement = document.getElementById('final-score');
+let characterElement = new Character(50, 0);
 
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
@@ -45,17 +14,18 @@ function showScreen(screenId) {
 
 function initializeGame() {
     score = 0;
-    frameCount = 0;
-    character.position.y = character.groundLevel;
-    character.velocity = 0;
-    character.isJumping = false;
     document.getElementById('score').textContent = `Score: 0`;
+    characterElement.position.y = characterElement.groundLevel;
+    characterElement.velocity = 0;
+    characterElement.isJumping = false;
+    if(typeof resetObstacles === 'function') { resetObstacles(); }
 }
 
 function startGame() {
     showScreen('game-screen');
     initializeGame();
     gameRunning = true;
+    lastTime = performance.now();
     if(gameLoop) { cancelAnimationFrame(gameLoop); }
     gameLoop = requestAnimationFrame(gameUpdate);
 }
@@ -63,28 +33,36 @@ function startGame() {
 function gameOver() {
     gameRunning = false;
     if(gameLoop) { cancelAnimationFrame(gameLoop); }
-    if(score > 0) {
-        showScreen('gameover-screen');
+    showScreen('gameover-screen');
+    if(finalScoreElement) {
         finalScoreElement.textContent = `Final Score: ${score}`;
     }
 }
 
-let lastTime = 0;
-
 function gameUpdate(currentTime) {
-
     if(!gameRunning) { return; }
 
     const deltaTime = (currentTime - lastTime) / 1000;
     lastTime = currentTime;
-    
-    document.getElementById('score').textContent = `${score}`;
-    update(deltaTime);
-    updateObstacles(deltaTime);
-    checkCollisions();
-    requestAnimationFrame(gameUpdate);
+    characterElement.update(deltaTime);
+
+    if(typeof updateObstacles === 'function') { updateObstacles(deltaTime); }
+    if(typeof checkCollisions === 'function') { checkCollisions(); }
+
+    gameLoop = requestAnimationFrame(gameUpdate);
 }
 
-gameRunning = true;
+
+function handleKeyboard(event) {
+    const key = event.key;
+    if (key === ' ' || key === 'ArrowUp') {
+        event.preventDefault();
+        characterElement.jump();
+    }
+}
+
+document.addEventListener('keydown', handleKeyboard);
+
+/*gameRunning = true;
 spawnObstacle();
-requestAnimationFrame(gameUpdate);
+requestAnimationFrame(gameUpdate);*/

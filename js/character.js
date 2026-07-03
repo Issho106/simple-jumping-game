@@ -1,69 +1,63 @@
-let isJumping = false;
-let position = { x: 50, y: 0 };
-let velocity = 0;
-const gravity = 400;
-const jumpStrength = -300;
-const groundLevel = 0;
-const charElement = document.getElementById('character');
-const characterWidth = 100;
-const characterHeight = 100;
-
-function jump() {
-    if (isJumping) return;
-    isJumping = true;
-    velocity = jumpStrength;
-}
-
-function updateCharacterPosition(deltaTime) {
-    position.y += velocity * deltaTime;
-}
-
-function applyGravity(deltaTime) {
-    velocity += gravity * deltaTime;
-}
-
-function land() {
-    isJumping = false;
-    velocity = 0;
-    position.y = groundLevel;
-}
-
-function update(deltaTime) {
-    applyGravity(deltaTime);
-    updateCharacterPosition(deltaTime);
-    if (position.y >= groundLevel) {
-        land();
+class Character {
+    constructor(x = 50, y = 0) {
+        this.isJumping = false;
+        this.position = { x: x, y: y };
+        this.velocity = 0;
+        this.gravity = -800;
+        this.jumpStrength = 550;
+        this.groundLevel = 0;      
+        this.characterWidth = 100;
+        this.characterHeight = 100;  
     }
 
-    charElement.style.bottom = `${20-position.y}px`;
-    charElement.style.left = `${position.x}px`;
-}
+    jump() {
+        if (!this.isJumping) {
+            this.isJumping = true;
+            this.velocity = this.jumpStrength;
+        }
+    }
 
-function handleKeyboard(event) {
-    const key = event.key;
-    if (key === ' ' || key === 'ArrowUp') {
-        event.preventDefault();
-        jump();
+    getCharacterBounds() {
+        return {
+            x: position.x,
+            y: 20 + position.y,
+            width: this.characterWidth,
+            height: this.characterHeight
+        };
+    }
+
+    update(deltaTime) {
+        this._updateCharacterPosition(deltaTime);
+        this._applyGravity(deltaTime);
+        this._checkFloorCollision();
+        this._render();
+    }
+
+    _updateCharacterPosition(deltaTime) {
+        position.y += velocity * deltaTime;
+    }
+    
+    _applyGravity(deltaTime) {
+        velocity += gravity * deltaTime;
+    }
+
+    _land() {
+        this.isJumping = false;
+        this.position.y = this.groundLevel;
+        this.velocity = 0;
+    }
+    
+    _checkFloorCollision() {
+        if (this.position.y <= this.groundLevel) {
+            land();
+        }
+    }
+    
+    _render() {
+        const characterElement = document.getElementById('character');
+        if(characterElement) {
+            characterElement.style.bottom = `${20 + position.y}px`;
+            characterElement.style.left = `${position.x}px`;
+        }
     }
 }
-
-function handleClick(event) {
-    const button = event.target.closest('button');
-    if (!button) { return; }
-    const input = button.value;
-    if (input === 'game-screen') {
-        jump();
-    }
-}
-
-function getCharacterBounds() {
-    return {
-        x: position.x,
-        y: position.y,
-        width: 15,
-        height: 53
-    };
-}
-
-document.addEventListener('keydown', handleKeyboard);
-document.addEventListener('click', handleClick);
