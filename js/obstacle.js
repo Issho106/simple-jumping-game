@@ -5,6 +5,11 @@ function createObstacle() {
     const obstacleElement = document.createElement('div');
     obstacleElement.classList.add('obstacle');
 
+    const obstacleImage = document.createElement('img');
+    obstacleImage.src = './assets/images/skeleton.png';
+    obstacleImage.alt = 'Skeleton';
+    obstacleElement.appendChild(obstacleImage);
+
     const obstacle = {
         x: 800,
         y: 20,
@@ -52,6 +57,22 @@ function checkCollisions() {
 }
 
 function spawnObstacle() {
+
+    if (!gameRunning) {
+        return;
+    }
+
+    const minimumDistance = 100;
+
+    if (obstacles.length > 0) {
+        const lastObstacle = obstacles[obstacles.length - 1];
+
+        // Only spawn if the last obstacle is far enough away
+        if (lastObstacle.x > 800 - minimumDistance) {
+            setTimeout(spawnObstacle, 300);
+            return;
+        }
+    }
     createObstacle();
 
     const randomDelay = Math.floor(Math.random() * 2000) + 1500;

@@ -2,6 +2,7 @@ let gameRunning = false;
 let score = 0;
 let lastTime = 0;
 let gameLoop = null;
+const scoreRate = 10;
 let finalScoreElement = document.getElementById('final-score');
 let characterElement = new Character(50, 0);
 
@@ -39,7 +40,7 @@ function gameOver() {
     }
     showScreen('gameover-screen');
     if(finalScoreElement) {
-        finalScoreElement.textContent = `${score}`;
+        finalScoreElement.textContent = Math.floor(score);
     }
 }
 
@@ -52,6 +53,8 @@ function gameUpdate(currentTime) {
 
     const deltaTime = (currentTime - lastTime) / 1000;
     lastTime = currentTime;
+    score += scoreRate * deltaTime;
+    document.getElementById('score').textContent = Math.floor(score);
     characterElement.update(deltaTime);
 
     if(typeof updateObstacles === 'function') { updateObstacles(deltaTime); }
@@ -71,15 +74,9 @@ function handleKeyboard(event) {
 
 document.addEventListener('keydown', handleKeyboard);
 
-<<<<<<< HEAD
-gameRunning = true;
-spawnObstacle();
-requestAnimationFrame(gameUpdate);
-=======
 document.addEventListener('DOMContentLoaded', () => {
     const startButton = document.getElementById('start-btn');
     const restartButton = document.getElementById('restart-btn');
     if(startButton) { startButton.addEventListener('click', startGame); }
     if(restartButton) { restartButton.addEventListener('click', restartGame); }
 });
->>>>>>> 93aa8bda8025772ea3d76ae690de86a5d4be81a8
