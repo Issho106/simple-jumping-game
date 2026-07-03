@@ -18,7 +18,7 @@ function initializeGame() {
     characterElement.position.y = characterElement.groundLevel;
     characterElement.velocity = 0;
     characterElement.isJumping = false;
-    /*if(typeof resetObstacles === 'function') { resetObstacles(); }*/
+    if(typeof resetObstacles === 'function') { resetObstacles(); }
 }
 
 function startGame() {
@@ -26,17 +26,20 @@ function startGame() {
     initializeGame();
     gameRunning = true;
     lastTime = performance.now();
-    /*if (typeof spawnObstacle === 'function') { spawnObstacle(); }*/
+    if (typeof spawnObstacle === 'function') { spawnObstacle(); }
     if(gameLoop) { cancelAnimationFrame(gameLoop); }
     gameLoop = requestAnimationFrame(gameUpdate);
 }
 
 function gameOver() {
     gameRunning = false;
-    if(gameLoop) { cancelAnimationFrame(gameLoop); }
+    if(gameLoop) {
+        cancelAnimationFrame(gameLoop);
+        gameLoop = null;
+    }
     showScreen('gameover-screen');
     if(finalScoreElement) {
-        finalScoreElement.textContent = `Final Score: ${score}`;
+        finalScoreElement.textContent = `${score}`;
     }
 }
 
@@ -51,8 +54,8 @@ function gameUpdate(currentTime) {
     lastTime = currentTime;
     characterElement.update(deltaTime);
 
-    /*if(typeof updateObstacles === 'function') { updateObstacles(deltaTime); }
-    if(typeof checkCollisions === 'function') { checkCollisions(); }*/
+    if(typeof updateObstacles === 'function') { updateObstacles(deltaTime); }
+    if(typeof checkCollisions === 'function') { checkCollisions(); }
 
     gameLoop = requestAnimationFrame(gameUpdate);
 }

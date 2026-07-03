@@ -1,4 +1,5 @@
-const obstacles = [];
+let obstacles = [];
+characterElement = new Character(50, 0);
 
 function createObstacle() {
     const obstacleElement = document.createElement('div');
@@ -33,7 +34,7 @@ function updateObstacles(deltaTime) {
 }
 
 function checkCollisions() {
-    const player = getCharacterBounds();
+    const player = characterElement.getCharacterBounds();
 
     for (const obstacle of obstacles) {
 
@@ -55,4 +56,12 @@ function spawnObstacle() {
 
     const randomDelay = Math.floor(Math.random() * 2000) + 1500;
     setTimeout(spawnObstacle, randomDelay);
+}
+
+function resetObstacles() {
+    const container = document.getElementById('obstacle-container');
+    if(container) {
+        container.innerHTML = '';
+    }
+    obstacles = [];
 }

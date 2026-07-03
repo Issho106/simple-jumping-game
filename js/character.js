@@ -3,8 +3,8 @@ class Character {
         this.isJumping = false;
         this.position = { x: x, y: y };
         this.velocity = 0;
-        this.gravity = -800;
-        this.jumpStrength = 550;
+        this.gravity = -350;
+        this.jumpStrength = 300;
         this.groundLevel = 0;      
         this.characterWidth = 100;
         this.characterHeight = 100;  
