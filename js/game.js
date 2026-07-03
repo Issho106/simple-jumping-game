@@ -63,6 +63,6 @@ function handleKeyboard(event) {
 
 document.addEventListener('keydown', handleKeyboard);
 
-/*gameRunning = true;
+gameRunning = true;
 spawnObstacle();
-requestAnimationFrame(gameUpdate);*/
+requestAnimationFrame(gameUpdate);
