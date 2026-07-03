@@ -62,17 +62,16 @@ function spawnObstacle() {
         return;
     }
 
-    const minimumDistance = 130;
+    const minimumDistance = 250;
 
     if (obstacles.length > 0) {
-        const lastObstacle = obstacles[obstacles.length - 1];
+    const lastObstacle = obstacles[obstacles.length - 1];
 
-        // Only spawn if the last obstacle is far enough away
-        if (lastObstacle.x > 800 - minimumDistance) {
-            setTimeout(spawnObstacle, 300);
-            return;
-        }
+    if ((800 - lastObstacle.x) < minimumDistance) {
+        setTimeout(spawnObstacle, 100);
+        return;
     }
+}
     createObstacle();
 
     const randomDelay = Math.floor(Math.random() * 2000) + 1500;
