@@ -7,18 +7,18 @@ let characterElement = new Character(50, 0);
 
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
+        screen.classList.add('hidden');
     });
-    document.getElementById(screenId).classList.add('active');
+    document.getElementById(screenId).classList.remove('hidden');
 }
 
 function initializeGame() {
     score = 0;
-    document.getElementById('score').textContent = `Score: 0`;
+    document.getElementById('score').textContent = `0`;
     characterElement.position.y = characterElement.groundLevel;
     characterElement.velocity = 0;
     characterElement.isJumping = false;
-    if(typeof resetObstacles === 'function') { resetObstacles(); }
+    /*if(typeof resetObstacles === 'function') { resetObstacles(); }*/
 }
 
 function startGame() {
@@ -26,6 +26,7 @@ function startGame() {
     initializeGame();
     gameRunning = true;
     lastTime = performance.now();
+    /*if (typeof spawnObstacle === 'function') { spawnObstacle(); }*/
     if(gameLoop) { cancelAnimationFrame(gameLoop); }
     gameLoop = requestAnimationFrame(gameUpdate);
 }
@@ -39,6 +40,10 @@ function gameOver() {
     }
 }
 
+function restartGame() {
+    startGame();
+}
+
 function gameUpdate(currentTime) {
     if(!gameRunning) { return; }
 
@@ -46,8 +51,8 @@ function gameUpdate(currentTime) {
     lastTime = currentTime;
     characterElement.update(deltaTime);
 
-    if(typeof updateObstacles === 'function') { updateObstacles(deltaTime); }
-    if(typeof checkCollisions === 'function') { checkCollisions(); }
+    /*if(typeof updateObstacles === 'function') { updateObstacles(deltaTime); }
+    if(typeof checkCollisions === 'function') { checkCollisions(); }*/
 
     gameLoop = requestAnimationFrame(gameUpdate);
 }
@@ -63,6 +68,9 @@ function handleKeyboard(event) {
 
 document.addEventListener('keydown', handleKeyboard);
 
-/*gameRunning = true;
-spawnObstacle();
-requestAnimationFrame(gameUpdate);*/
+document.addEventListener('DOMContentLoaded', () => {
+    const startButton = document.getElementById('start-btn');
+    const restartButton = document.getElementById('restart-btn');
+    if(startButton) { startButton.addEventListener('click', startGame); }
+    if(restartButton) { restartButton.addEventListener('click', restartGame); }
+});
