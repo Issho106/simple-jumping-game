@@ -15,7 +15,7 @@ function createObstacle() {
         y: 20,
         width: 20,
         height: 40,
-        speed: 200,
+        speed: gameSpeed,
         element: obstacleElement
     };
 
@@ -26,8 +26,8 @@ function createObstacle() {
 }
 
 function updateObstacles(deltaTime) {
-
     for(const obstacle of obstacles) {
+        obstacle.speed = gameSpeed;
         obstacle.x -= obstacle.speed * deltaTime;
         obstacle.element.style.left = `${obstacle.x}px`;
 
@@ -62,7 +62,7 @@ function spawnObstacle() {
         return;
     }
 
-    const minimumDistance = 100;
+    const minimumDistance = 130;
 
     if (obstacles.length > 0) {
         const lastObstacle = obstacles[obstacles.length - 1];

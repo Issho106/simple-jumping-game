@@ -5,6 +5,8 @@ let gameLoop = null;
 const scoreRate = 10;
 let finalScoreElement = document.getElementById('final-score');
 let characterElement = new Character(50, 0);
+let gameSpeed = 200;
+let speedLevel = 0;
 
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
@@ -14,6 +16,8 @@ function showScreen(screenId) {
 }
 
 function initializeGame() {
+    gameSpeed = 200;
+    lvlSpeed = 0;
     score = 0;
     document.getElementById('score').textContent = `0`;
     characterElement.position.y = characterElement.groundLevel;
@@ -55,6 +59,12 @@ function gameUpdate(currentTime) {
     lastTime = currentTime;
     score += scoreRate * deltaTime;
     document.getElementById('score').textContent = Math.floor(score);
+    const newSpeedLevel = Math.floor(score / 100);
+
+    if (newSpeedLevel > speedLevel) {
+        speedLevel = newSpeedLevel;
+        gameSpeed += 25; // Increase by 25 every 100 points
+    }
     characterElement.update(deltaTime);
 
     if(typeof updateObstacles === 'function') { updateObstacles(deltaTime); }
