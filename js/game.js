@@ -7,14 +7,14 @@ let characterElement = new Character(50, 0);
 
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
+        screen.classList.add('hidden');
     });
-    document.getElementById(screenId).classList.add('active');
+    document.getElementById(screenId).classList.remove('hidden');
 }
 
 function initializeGame() {
     score = 0;
-    document.getElementById('score').textContent = `Score: 0`;
+    document.getElementById('score').textContent = `0`;
     characterElement.position.y = characterElement.groundLevel;
     characterElement.velocity = 0;
     characterElement.isJumping = false;
@@ -26,17 +26,25 @@ function startGame() {
     initializeGame();
     gameRunning = true;
     lastTime = performance.now();
+    if (typeof spawnObstacle === 'function') { spawnObstacle(); }
     if(gameLoop) { cancelAnimationFrame(gameLoop); }
     gameLoop = requestAnimationFrame(gameUpdate);
 }
 
 function gameOver() {
     gameRunning = false;
-    if(gameLoop) { cancelAnimationFrame(gameLoop); }
+    if(gameLoop) {
+        cancelAnimationFrame(gameLoop);
+        gameLoop = null;
+    }
     showScreen('gameover-screen');
     if(finalScoreElement) {
-        finalScoreElement.textContent = `Final Score: ${score}`;
+        finalScoreElement.textContent = `${score}`;
     }
+}
+
+function restartGame() {
+    startGame();
 }
 
 function gameUpdate(currentTime) {
@@ -63,6 +71,15 @@ function handleKeyboard(event) {
 
 document.addEventListener('keydown', handleKeyboard);
 
+<<<<<<< HEAD
 gameRunning = true;
 spawnObstacle();
 requestAnimationFrame(gameUpdate);
+=======
+document.addEventListener('DOMContentLoaded', () => {
+    const startButton = document.getElementById('start-btn');
+    const restartButton = document.getElementById('restart-btn');
+    if(startButton) { startButton.addEventListener('click', startGame); }
+    if(restartButton) { restartButton.addEventListener('click', restartGame); }
+});
+>>>>>>> 93aa8bda8025772ea3d76ae690de86a5d4be81a8

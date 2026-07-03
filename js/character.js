@@ -3,8 +3,8 @@ class Character {
         this.isJumping = false;
         this.position = { x: x, y: y };
         this.velocity = 0;
-        this.gravity = -800;
-        this.jumpStrength = 550;
+        this.gravity = -350;
+        this.jumpStrength = 300;
         this.groundLevel = 0;      
         this.characterWidth = 100;
         this.characterHeight = 100;  
@@ -19,8 +19,8 @@ class Character {
 
     getCharacterBounds() {
         return {
-            x: position.x,
-            y: 20 + position.y,
+            x: this.position.x,
+            y: 20 + this.position.y,
             width: this.characterWidth,
             height: this.characterHeight
         };
@@ -34,11 +34,11 @@ class Character {
     }
 
     _updateCharacterPosition(deltaTime) {
-        position.y += velocity * deltaTime;
+        this.position.y += this.velocity * deltaTime;
     }
     
     _applyGravity(deltaTime) {
-        velocity += gravity * deltaTime;
+        this.velocity += this.gravity * deltaTime;
     }
 
     _land() {
@@ -49,15 +49,15 @@ class Character {
     
     _checkFloorCollision() {
         if (this.position.y <= this.groundLevel) {
-            land();
+            this._land();
         }
     }
     
     _render() {
         const characterElement = document.getElementById('character');
         if(characterElement) {
-            characterElement.style.bottom = `${20 + position.y}px`;
-            characterElement.style.left = `${position.x}px`;
+            characterElement.style.bottom = `${20 + this.position.y}px`;
+            characterElement.style.left = `${this.position.x}px`;
         }
     }
 }
