@@ -17,7 +17,6 @@ function showScreen(screenId) {
 
 function initializeGame() {
     gameSpeed = 200;
-    lvlSpeed = 0;
     score = 0;
     document.getElementById('score').textContent = `0`;
     characterElement.position.y = characterElement.groundLevel;
@@ -63,7 +62,7 @@ function gameUpdate(currentTime) {
 
     if (newSpeedLevel > speedLevel) {
         speedLevel = newSpeedLevel;
-        gameSpeed += 25; // Increase by 25 every 100 points
+        gameSpeed += 25;
     }
     characterElement.update(deltaTime);
 
@@ -72,7 +71,6 @@ function gameUpdate(currentTime) {
 
     gameLoop = requestAnimationFrame(gameUpdate);
 }
-
 
 function handleKeyboard(event) {
     const key = event.key;
