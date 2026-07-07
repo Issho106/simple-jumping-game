@@ -91,6 +91,6 @@ class GoldenKnight extends Character {
         super('./assets/images/golden-knight.png', 'Golden Knight')
     }
     
-    getGravity() { return -1850; }
-    getJumpStrength() { return 770; }
+    getGravity() { return -1625; }
+    getJumpStrength() { return 775; }
 }
