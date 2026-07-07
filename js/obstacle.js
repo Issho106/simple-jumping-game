@@ -1,5 +1,4 @@
 let obstacles = [];
-characterElement = new Character(50, 0);
 
 function createObstacle() {
     const obstacleElement = document.createElement('div');
@@ -13,7 +12,7 @@ function createObstacle() {
     const obstacle = {
         x: 800,
         y: 20,
-        width: 20,
+        width: 25,
         height: 40,
         speed: gameSpeed,
         element: obstacleElement
@@ -38,7 +37,8 @@ function updateObstacles(deltaTime) {
     }
 }
 
-function checkCollisions() {
+function checkCollisions(characterElement) {
+    if(!characterElement) { return; }
     const player = characterElement.getCharacterBounds();
 
     for (const obstacle of obstacles) {

@@ -1,19 +1,23 @@
 class Character {
-    constructor(x = 50, y = 0) {
+    constructor(imageSource, imageAlternate) {
         this.isJumping = false;
-        this.position = { x: x, y: y };
+        this.position = { x: 50, y: 0 };
         this.velocity = 0;
-        this.gravity = -1150;
-        this.jumpStrength = 510;
         this.groundLevel = 0;      
         this.characterWidth = 82;
-        this.characterHeight = 110;  
+        this.characterHeight = 110;
+        this.imageSource = imageSource;
+        this.imageAlternate = imageAlternate;
+        this._updateCharacterVariation();
     }
+
+    getGravity() { return -1150; }
+    getJumpStrength() { return 510; }
 
     jump() {
         if (!this.isJumping) {
             this.isJumping = true;
-            this.velocity = this.jumpStrength;
+            this.velocity = this.getJumpStrength();
         }
     }
 
@@ -38,7 +42,7 @@ class Character {
     }
     
     _applyGravity(deltaTime) {
-        this.velocity += this.gravity * deltaTime;
+        this.velocity += this.getGravity() * deltaTime;
     }
 
     _land() {
@@ -60,4 +64,33 @@ class Character {
             characterElement.style.left = `${this.position.x}px`;
         }
     }
+
+    _updateCharacterVariation() {
+        const characterContainer = document.getElementById('character');
+        if(!characterContainer) { return; }
+
+        let characterImage = characterContainer.querySelector('img');
+        if(!characterImage) {
+            characterImage = document.createElement('img')
+            characterContainer.appendChild(characterImage);
+        }
+
+        characterImage.src = this.imageSource;
+        characterImage.alt = this.imageAlternate;
+    }
+}
+
+class SilverKnight extends Character {
+    constructor() {
+        super('./assets/images/silver-knight.png', 'Silver Knight');
+    }
+}
+
+class GoldenKnight extends Character {
+    constructor() {
+        super('./assets/images/golden-knight.png', 'Golden Knight')
+    }
+    
+    getGravity() { return -1850; }
+    getJumpStrength() { return 770; }
 }

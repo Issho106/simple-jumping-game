@@ -21,6 +21,27 @@
       <section id="landing-screen" class="screen">
         <h1>Jumping Game</h1>
         <h2>Press the spacebar to jump over obstacles!</h2>
+        <button id="play-btn">Play</button>
+      </section>
+
+      <section id="select-screen" class="screen hidden">
+        <p>Choose your character:</p>
+        <div id="selections">
+        <figure data-character="silver" class="selected">
+          <img src="./assets/images/silver-knight.png" alt="silver-knight">
+          <figcaption>
+            <span class="character-name">Silver Knight</span>
+            <span class="character-details">Standard jump height for classic gameplay.</span>
+          </figcaption>
+        </figure>
+        <figure data-character="golden">
+          <img src="./assets/images/golden-knight.png" alt="golden-knight">
+          <figcaption>
+            <span class="character-name">Golden Knight</span>
+            <span class="character-details">Blessed by solar magic to jump twice as high.</span>
+          </figcaption>
+        </figure>
+        </div>
         <button id="start-btn">Start</button>
       </section>
 
@@ -33,13 +54,10 @@
         </header>
 
         <div id="game-area">
-          <div id="character">
-            <img src="./assets/images/knight.png" alt="Knight">
-          </div>
+          <div id="character"></div>
 
           <div id="obstacle-container">
-            <div class="obstacle">
-            </div>
+            <div class="obstacle"></div>
           </div>
 
           <div id="ground">
@@ -55,6 +73,7 @@
           <span id="final-score">0</span>
         </p>
         <button id="restart-btn">Play Again</button>
+        <button id="change-btn">Change Knight</button>
       </section>
     </main>
   </body>

@@ -8,6 +8,7 @@
   --text-color: white;
   --green-button: #4caf50;
   --red-button: #d32f2f;
+  --purple-button: #af4cac;
 }
 
 * {
@@ -23,10 +24,6 @@ body {
   min-height: 100vh;
   background: var(--background-color);
   font-family: Arial, Helvetica, sans-serif;
-}
-
-#landing-screen > h2 {
-  color: white;
 }
 
 #game-container {
@@ -62,6 +59,73 @@ body {
   justify-content: center;
   align-items: center;
   gap: 35px;
+}
+
+#landing-screen > h2 {
+  color: white;
+}
+
+#select-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+#select-screen > h2 {
+  color: white;
+}
+
+#selections {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 100px;
+}
+
+#selections figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 150px;
+  margin: 0;
+  cursor: pointer;
+  transition: border-color 0.2 ease;
+}
+
+#selections img {
+  width: 100%;
+  max-width: 125px;
+  height: 125px;
+  align-items: center;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 3px solid transparent;
+}
+
+#selections figure.selected img {
+  border-color: #4caf50;
+}
+
+#selections figcaption {
+  width: 100%;
+  max-width: 125px;
+  text-align: center;
+}
+
+figcaption span {
+  display: block;
+}
+
+.character-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.character-details {
+  font-style: italic;
 }
 
 #game-screen {
@@ -160,6 +224,11 @@ p {
   font-size: 2rem;
 }
 
+figcaption {
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
 button {
   padding: 18px 60px;
   border: none;
@@ -172,6 +241,10 @@ button {
 
 button:hover {
   transform: scale(1.05);
+}
+
+#play-btn, #change-btn {
+  background: var(--purple-button);
 }
 
 #start-btn {
